@@ -1,0 +1,43 @@
+<html>
+    <head>
+
+        <style>
+        a {
+            display: inline-block;
+            /* margin-top: 100px; */
+            text-decoration: none;
+        }
+
+        a:hover {
+
+            text-decoration: underline;
+        }
+
+        .electron-tooltip {
+
+            text-align: center;
+            padding: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            color: #fff;
+            border-radius: 4px;
+            background-color: #000;
+        }
+        </style>
+    </head>
+    <body>
+        <div>
+            <span style="text-align: right" data-tooltip="Nothing to declareé, well maybe a little. Will this still fit? &#9820;  😂"  data-tooltip-width="150" data-tooltip-position="bottom">hallo tooltip</span>
+        </div>
+        <div>
+            <a href="#" data-tooltip="Go to www.google.nl 😬😬">test</a>
+        </div>
+        <div>
+            <span style="text-align: right; float: right" data-tooltip="Something to declare 😂" data-tooltip-position="top">hallo tooltip</span>
+        </div>
+
+        <script>
+            const tooltip = require('./electron-tooltip')
+        </script>
+    </body>
+</html>
