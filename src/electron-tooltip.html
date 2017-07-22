@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+
+        *,
+        *:before,
+        *:after {
+
+            background: transparent;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #electron-tooltip {
+
+            transition: all 100ms ease-in-out;
+            opacity: 0;
+            transform: scale3d(.4,.4,1);
+            margin-top: 10px; /* set a margin to to prevent the rounded corners from the window */
+            position: relative;
+            pointer-events: none;
+            white-space: nowrap;
+            display: inline-block;
+            -webkit-user-select: none;
+        }
+
+        #electron-tooltip:after {
+            position: absolute;
+            left: 50%;
+            display: block;
+            width: 12px;
+            height: 6px;
+            content: '';
+            background: inherit;
+        }
+
+        #electron-tooltip.position-top:after {
+            bottom: 0;
+            transform: translate(-50%, 100%);
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+        }
+
+        #electron-tooltip.position-bottom:after {
+            top: 0;
+            transform: translate(-50%, -100%);
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="electron-tooltip"></div>
+    <script>
+        require('./tooltip-events')
+    </script>
+</body>
+</html>

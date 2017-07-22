@@ -3,13 +3,12 @@ module.exports = (() => {
     const electron = require('electron')
     const {BrowserWindow, app} = electron.remote
     const {ipcRenderer} = electron
+    const win = electron.remote.getCurrentWindow()
 
     const path = require('path')
     const url = require('url')
 
-    // Create the tooltop window
     let tooltipWin = new BrowserWindow({
-
         resizable: false,
         alwaysOnTop: true,
         focusable: false,
@@ -25,10 +24,19 @@ module.exports = (() => {
         slashes: true
     }))
 
+    // Remove the tooltip window object when the host window is being closed or reloaded.
+    // Cannot win.on('close') here since the BW was created in the render process using remote.
+    // See: https://github.com/electron/electron/issues/8196
+    window.onbeforeunload = (e) => {
+
+        tooltipWin.destroy()
+        tooltipWin = null
+    }
+
     tooltipWin.webContents.on('did-finish-load', () => {
 
         const tooltips = document.querySelectorAll('[data-tooltip]')
-        const win = electron.remote.getCurrentWindow()
+
 
         // Create a fake element to apply the styling onto
         // @todo: find a way to get the properties without having to append an element to the body
@@ -66,9 +74,4 @@ module.exports = (() => {
         })
     })
 
-    // Dereference tooltip when app is closed
-    app.on('window-all-closed', () => {
-
-        tooltipWin = null
-    })
 })()
