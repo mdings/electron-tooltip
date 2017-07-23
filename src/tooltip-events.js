@@ -5,10 +5,6 @@ const tooltipWindow = electron.remote.getCurrentWindow()
 const elm = document.getElementById('electron-tooltip')
 const inheritProperties = require('./props')
 
-process.on('uncaughtException', function(err) {
-
-    electron.remote.process.log(err)
-});
 
 elm.addEventListener('transitionend', (e) => {
 
@@ -55,22 +51,64 @@ ipcRenderer.on('set-content', (e, details) => {
     elm.style.transform = 'scale3d(1, 1, 1)'
     elm.innerHTML = content
 
-    // 16 = the arrow height + margin-top of the tooltip
-    tooltipWindow.setContentSize(elm.clientWidth, elm.clientHeight + 16)
+    // 12 = the margins on boths sides
+    tooltipWindow.setContentSize(elm.clientWidth + 12, elm.clientHeight + 12)
 
     // Calculate the position of the element on the screen. Below consts return the topleft position of the element that should hold the tooltip
-    const elmOffsetLeft = Math.round(originalWinBounds.x + elmDimensions.left)
-    const elmOffsetTop = Math.round(originalWinBounds.y + elmDimensions.top)
+    var elmOffsetLeft = Math.round(originalWinBounds.x + elmDimensions.left)
+    var elmOffsetTop = Math.round(originalWinBounds.y + elmDimensions.top)
 
+    let positions = {
+
+        top() {
+
+            const top = elmOffsetTop - tooltipWindow.getContentSize()[1]
+            return [this.horizontalCenter(), top]
+        },
+
+        bottom() {
+
+            const top = elmOffsetTop + elmDimensions.height
+            return [this.horizontalCenter(), top]
+        },
+
+        left() {
+
+            const left = elmOffsetLeft - tooltipWindow.getContentSize()[0]
+            return [left, this.verticalCenter()]
+        },
+
+        right() {
+
+            const left = elmOffsetLeft + Math.round(elmDimensions.width)
+            return [left, this.verticalCenter()]
+        },
+
+        horizontalCenter() {
+
+            return elmOffsetLeft - (Math.round((tooltipWindow.getContentSize()[0] - elmDimensions.width) / 2))
+        },
+
+        verticalCenter() {
+
+            return elmOffsetTop - (Math.round((tooltipWindow.getContentSize()[1] - elmDimensions.height) / 2))
+        }
+
+    }
     // Set the tooltip above the element with 5px extra offset
-    const top = config.position == 'bottom'
-        ? elmOffsetTop + elmDimensions.height
-        : elmOffsetTop - tooltipWindow.getContentSize()[1]
-    elm.classList.add(`position-${config.position}`)
+    // const top = config.position == 'bottom'
+    //     ? elmOffsetTop + elmDimensions.height
+    //     : elmOffsetTop - tooltipWindow.getContentSize()[1]
+    // elm.classList.add(`position-${config.position}`)
 
-    // Center the tooltip above the element where possible
-    const left = elmOffsetLeft - (Math.round((tooltipWindow.getContentSize()[0] - elmDimensions.width) / 2))
-    tooltipWindow.setPosition(left, top)
+    // const left = config.position == 'right'
+    //     ? elmOffsetLeft + Math.round(elmDimensions.width)
+    //     : elmOffsetLeft - (Math.round((tooltipWindow.getContentSize()[0] - elmDimensions.width) / 2)) //center
+
+    // Position the tooltip
+    elm.classList.add(`position-${config.position}`)
+    const getPosition = positions[config.position]()
+    tooltipWindow.setPosition(...getPosition)
 
     // Show it as inactive
     process.nextTick(() => {

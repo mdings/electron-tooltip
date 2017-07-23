@@ -13,45 +13,86 @@
             padding: 0;
         }
 
-        #electron-tooltip {
+        body {
 
+             /* border: 1px solid red; */
+        }
+
+        #electron-tooltip {
+            display: inline-block;
+            text-overflow: hidden;
             transition: all 100ms ease-in-out;
             opacity: 0;
             transform: scale3d(.4,.4,1);
-            margin-top: 10px; /* set a margin to to prevent the rounded corners from the window */
+            margin: 6px; /* set a margin for the tooltips */
             position: relative;
             pointer-events: none;
-            white-space: nowrap;
-            display: inline-block;
             -webkit-user-select: none;
         }
 
         #electron-tooltip:after {
             position: absolute;
-            left: 50%;
             display: block;
-            width: 12px;
-            height: 6px;
             content: '';
             background: inherit;
         }
 
+        #electron-tooltip.position-top {
+            transform-origin: 50% 100%;
+        }
+
         #electron-tooltip.position-top:after {
+            width: 12px;
+            height: 6px;
+            left: 50%;
             bottom: 0;
             transform: translate(-50%, 100%);
             clip-path: polygon(0 0, 50% 100%, 100% 0);
         }
 
+        #electron-tooltip.position-bottom {
+            transform-origin: 50% 0%;
+        }
+
         #electron-tooltip.position-bottom:after {
+            width: 12px;
+            height: 6px;
+            left: 50%;
             top: 0;
             transform: translate(-50%, -100%);
             clip-path: polygon(0 100%, 50% 0, 100% 100%);
         }
 
+        #electron-tooltip.position-right {
+            transform-origin: 0% 50%;
+        }
+
+        #electron-tooltip.position-right:after {
+            width: 6px;
+            height: 12px;
+            left: 0;
+            top: 50%;
+            transform: translate(-100%, -50%);
+            clip-path: polygon(0 50%, 100% 100%, 100% 0);
+        }
+
+        #electron-tooltip.position-left {
+            transform-origin: 100% 50%;
+        }
+
+        #electron-tooltip.position-left:after {
+            width: 6px;
+            height: 12px;
+            right: 0;
+            top: 50%;
+            transform: translate(100%, -50%);
+            clip-path: polygon(100% 50%, 0 0, 0 100%);
+        }
+
     </style>
 </head>
 <body>
-    <div id="electron-tooltip"></div>
+    <div id="electron-tooltip"><span clas=="content"></span></div>
     <script>
         require('./tooltip-events')
     </script>
