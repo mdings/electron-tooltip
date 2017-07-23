@@ -62,25 +62,25 @@ ipcRenderer.on('set-content', (e, details) => {
 
         top() {
 
-            const top = elmOffsetTop - tooltipWindow.getContentSize()[1]
+            const top = elmOffsetTop - tooltipWindow.getContentSize()[1] - Math.max(0, config.offset)
             return [this.horizontalCenter(), top]
         },
 
         bottom() {
 
-            const top = elmOffsetTop + elmDimensions.height
+            const top = elmOffsetTop + elmDimensions.height + Math.max(0, config.offset)
             return [this.horizontalCenter(), top]
         },
 
         left() {
 
-            const left = elmOffsetLeft - tooltipWindow.getContentSize()[0]
+            const left = elmOffsetLeft - tooltipWindow.getContentSize()[0] - Math.max(0, config.offset)
             return [left, this.verticalCenter()]
         },
 
         right() {
 
-            const left = elmOffsetLeft + Math.round(elmDimensions.width)
+            const left = elmOffsetLeft + Math.round(elmDimensions.width) + Math.max(0, config.offset)
             return [left, this.verticalCenter()]
         },
 

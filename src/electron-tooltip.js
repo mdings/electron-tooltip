@@ -55,6 +55,7 @@ module.exports = (() => {
                 const content = e.target.getAttribute('data-tooltip')
                 const dimensions = e.target.getBoundingClientRect()
                 const config = {
+                    offset: e.target.getAttribute('data-tooltip-offset') || 0,
                     width: e.target.getAttribute('data-tooltip-width') || null,
                     position: e.target.getAttribute('data-tooltip-position') || 'top'
                 }
