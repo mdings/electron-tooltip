@@ -2,7 +2,7 @@
 
 ## Description
 
-This module is intended to be used in Electron applications. It allows for tooltips to flow outside the window bounds they're called from.
+This module is intended to be used in [Electron applications](https://electron.atom.io/). It allows for tooltips to flow outside the window bounds they're called from.
 
 ## Installation
 
@@ -19,7 +19,7 @@ require('electron-tooltip')
 ```
 
 ```html
-<a href="http://www.facebook.com" data-tooltip="Go to Facebook"></a>
+<a href="http://www.facebook.com" data-tooltip="Go to Facebook" data-position="bottom"></a>
 ```
 
 ### Configuration options
