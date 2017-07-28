@@ -13,14 +13,19 @@ npm install --save-dev electron-tooltip
 ```
 
 ## Usage
-After importing the module, it will search for elements that have the data-tooltip attribute attached. All further configuration is done through additional data-attributes.
+After importing the module, it will search for elements that have the data-tooltip attribute attached. A configuration object can be passed in when calling the tooltip function.
 
 ```javascript
 // in the render process..
-require('electron-tooltip')
+const tt = require('electron-tooltip')
+tt({
+  // config properties
+})
 ```
+Position, width and offset options can be overriden on a per element basis by using the data-tooltip-{option} attribute.
 
 ```html
+<!-- basic example: -->
 <a href="http://www.facebook.com" data-tooltip="Go to Facebook" data-position="bottom"></a>
 ```
 
@@ -28,18 +33,20 @@ require('electron-tooltip')
 
 |option|description|default|values|
 |---|---|---|---|
-|data-position|Tooltip direction|top|left, top, right, bottom|
-|data-width|Max-size of the tooltip. If no max-size is given, the tooltip will not wrap content|none|> 0|
-|data-offset|Offset from the element to the tooltip|0|> 0|
+|position|Tooltip direction|top|left, top, right, bottom|
+|width|Width of the tooltip. If width is set to auto, the tooltip will not wrap content|auto|> 0|
+|offset|Offset from the element to the tooltip|0|> 0|
+|style|Object for overwriting default styles|{}||
 
-### Styling
-The tooltips are somewhat styleable with regular CSS using the `.electron-tooltip` selector. With somewhat I mean that not all properties are currently stylable. Also note that the classname doesn't necessarily have to be defined on the element itself. The following properties are currently supported:
-
-- text-align
-- padding
-- border-radius
-- background-color
-- font-family
-- font-size
-- color
-- line-height
+```javascript
+// example
+// in the render process..
+const tt = require('electron-tooltip')
+tt({
+  position: 'bottom',
+  width: 200,
+  style: {
+    backgroundColor: '#f2f3f4',
+    borderRadius: '4px'
+  }
+})
