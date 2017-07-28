@@ -4,7 +4,7 @@ const {ipcRenderer, ipcMain} = electron
 const tooltipWindow = electron.remote.getCurrentWindow()
 const elm = document.getElementById('electron-tooltip')
 
-elm.addEventListener('transitionend', (e) => {
+elm.addEventListener('transitionend', e => {
 
     if (e.target.style.opacity == 0) {
         elm.innerHTML = ''
@@ -46,6 +46,7 @@ ipcRenderer.on('set-content', (e, details) => {
 
     elm.style.opacity = 1;
     elm.style.transform = 'scale3d(1, 1, 1)'
+    elm.classList.add(`position-${config.position}`)
     elm.innerHTML = content
 
     // 12 = the margins on boths sides
@@ -56,7 +57,6 @@ ipcRenderer.on('set-content', (e, details) => {
     var elmOffsetTop = Math.round(originalWinBounds.y + elmDimensions.top)
 
     let positions = {
-
         top() {
             const top = elmOffsetTop - tooltipWindow.getContentSize()[1] - Math.max(0, config.offset)
             return [this.horizontalCenter(), top]
@@ -71,8 +71,8 @@ ipcRenderer.on('set-content', (e, details) => {
             const left = elmOffsetLeft - tooltipWindow.getContentSize()[0] - Math.max(0, config.offset)
             return [left, this.verticalCenter()]
         },
-        right() {
 
+        right() {
             const left = elmOffsetLeft + Math.round(elmDimensions.width) + Math.max(0, config.offset)
             return [left, this.verticalCenter()]
         },
@@ -84,11 +84,9 @@ ipcRenderer.on('set-content', (e, details) => {
         verticalCenter() {
             return elmOffsetTop - (Math.round((tooltipWindow.getContentSize()[1] - elmDimensions.height) / 2))
         }
-
     }
 
     // Position the tooltip
-    elm.classList.add(`position-${config.position}`)
     const getPosition = positions[config.position]()
     tooltipWindow.setPosition(...getPosition)
 

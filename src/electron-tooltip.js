@@ -35,7 +35,7 @@ module.exports = ((params = {}) => {
     // Remove the tooltip window object when the host window is being closed or reloaded.
     // Cannot win.on('close') here since the BW was created in the render process using remote.
     // See: https://github.com/electron/electron/issues/8196
-    window.onbeforeunload = (e) => {
+    window.onbeforeunload = e => {
         tooltipWin.destroy()
         tooltipWin = null
     }
@@ -46,9 +46,7 @@ module.exports = ((params = {}) => {
 
         const tooltips = document.querySelectorAll('[data-tooltip]')
         Array.prototype.forEach.call(tooltips, tooltip => {
-
-            tooltip.addEventListener('mouseenter', (e) => {
-
+            tooltip.addEventListener('mouseenter', e => {
                 const content = e.target.getAttribute('data-tooltip')
                 const dimensions = e.target.getBoundingClientRect()
                 const localConfig = {
@@ -65,8 +63,7 @@ module.exports = ((params = {}) => {
                 })
             })
 
-            tooltip.addEventListener('mouseleave', (e) => {
-
+            tooltip.addEventListener('mouseleave', e => {
                 tooltipWin.webContents.send('reset-content')
             })
         })
