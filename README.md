@@ -4,6 +4,8 @@
 
 This module is intended to be used in [Electron applications](https://electron.atom.io/). It allows for tooltips to flow outside the window bounds they're called from.
 
+<img src="sample.gif" width="500" />
+
 ## Installation
 
 ```javascript
