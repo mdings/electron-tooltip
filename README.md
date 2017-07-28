@@ -26,7 +26,7 @@ Position, width and offset options can be overriden on a per element basis by us
 
 ```html
 <!-- basic example: -->
-<a href="http://www.facebook.com" data-tooltip="Go to Facebook" data-position="bottom"></a>
+<a href="http://www.facebook.com" data-tooltip="Go to Facebook" data-tooltip-position="bottom"></a>
 ```
 
 ### Configuration options
