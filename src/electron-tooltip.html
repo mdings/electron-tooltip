@@ -14,10 +14,6 @@
         }
 
         #electron-tooltip {
-            background-color: #333;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            border-radius: 4px;
-            padding: 6px 8px;
             display: inline-block;
             text-overflow: hidden;
             transition: all 100ms ease-in-out;
@@ -27,6 +23,15 @@
             position: relative;
             pointer-events: none;
             -webkit-user-select: none;
+
+            /* default styles */
+            text-align: center;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            color: #fff;
+            background-color: #333;
+            border-radius: 5px;
+            padding: 8px 10px;
         }
 
         #electron-tooltip:after {
@@ -36,8 +41,8 @@
             background: inherit;
         }
 
-        #electron-tooltip.position-top {
-            transform-origin: 50% 0%;
+         #electron-tooltip.position-top {
+            transform-origin: 50% 100%;
         }
 
         #electron-tooltip.position-top:after {
@@ -49,8 +54,8 @@
             clip-path: polygon(0 0, 50% 100%, 100% 0);
         }
 
-        #electron-tooltip.position-bottom {
-            transform-origin: 50% 100%;
+         #electron-tooltip.position-bottom {
+            transform-origin: 50% 0%;
         }
 
         #electron-tooltip.position-bottom:after {
@@ -62,8 +67,8 @@
             clip-path: polygon(0 100%, 50% 0, 100% 100%);
         }
 
-        #electron-tooltip.position-right {
-            transform-origin: 100% 50%;
+         #electron-tooltip.position-right {
+            transform-origin: 0% 50%;
         }
 
         #electron-tooltip.position-right:after {
@@ -75,8 +80,8 @@
             clip-path: polygon(0 50%, 100% 100%, 100% 0);
         }
 
-        #electron-tooltip.position-left {
-            transform-origin: 0% 50%;
+         #electron-tooltip.position-left {
+            transform-origin: 100% 50%;
         }
 
         #electron-tooltip.position-left:after {
@@ -91,7 +96,7 @@
     </style>
 </head>
 <body>
-    <div id="electron-tooltip"><span clas=="content"></span></div>
+    <div id="electron-tooltip"></div>
     <script>
         require('./tooltip-events')
     </script>

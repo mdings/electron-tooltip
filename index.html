@@ -11,21 +11,11 @@
 
             text-decoration: underline;
         }
-
-        .electron-tooltip {
-            text-align: center;
-            padding: 10px;
-            border-radius: 2px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
-            color: #fff;
-            background-color: #333;
-        }
         </style>
     </head>
     <body>
         <div>
-            <span style="text-align: right" data-tooltip="Nothing to declareé, well maybe a little. Will this still fit? &#9820;  😂"  data-tooltip-width="150" data-tooltip-position="left" data-tooltip-offset="0">hallo tooltip</span>
+            <span style="text-align: right" data-tooltip="Nothing to declareé, well maybe a little. Will this still fit? 😂"  data-tooltip-width="200" data-tooltip-position="bottom" data-tooltip-offset="0">hallo tooltip</span>
         </div>
         <div>
             <a href="#" data-tooltip="Go to www.google.nl " data-tooltip-position="left" data-tooltip-offset="0">test</a>
@@ -36,6 +26,7 @@
 
         <script>
             const tooltip = require('./src/electron-tooltip')
+            tooltip()
         </script>
     </body>
 </html>
