@@ -2,7 +2,7 @@
   "name": "electron-tooltip",
   "description": "Free your tooltips from their window bounds",
   "version": "1.0.1",
-  "main": ".src/electron-tooltip.js",
+  "main": "./src/electron-tooltip.js",
   "scripts": {
     "start": "electron .",
     "test": "echo \"Error: no test specified\" && exit 1"
