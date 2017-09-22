@@ -37,6 +37,7 @@ Position, width and offset options can be overriden on a per element basis by us
 |width|Width of the tooltip. If width is set to auto, the tooltip will not wrap content|auto|> 0|
 |offset|Offset from the element to the tooltip|0|> 0|
 |style|Object for overwriting default styles|{}||
+|customContent|Function that will be called each time the tooltip is shown. Takes two arguments: the element on which it was called, and the current value of `data-tooltip`. It should return a string which will be used instead of the `data-tooltip` value|undefined||
 
 ```javascript
 // example
