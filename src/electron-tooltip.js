@@ -47,13 +47,15 @@ module.exports = ((params = {}) => {
         const tooltips = document.querySelectorAll('[data-tooltip]')
         Array.prototype.forEach.call(tooltips, tooltip => {
             tooltip.addEventListener('mouseenter', e => {
-                const content = e.target.getAttribute('data-tooltip')
                 const dimensions = e.target.getBoundingClientRect()
                 const localConfig = {
                     offset: e.target.getAttribute('data-tooltip-offset') || config.offset,
                     width: e.target.getAttribute('data-tooltip-width') || config.width,
                     position: e.target.getAttribute('data-tooltip-position') || config.position
                 }
+                let content = e.target.getAttribute('data-tooltip')
+                if (typeof config.customContent === "function")
+									content = config.customContent(e.target, content)
 
                 tooltipWin.webContents.send('set-content', {
                     config: localConfig,
