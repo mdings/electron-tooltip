@@ -53,7 +53,7 @@ module.exports = ((params = {}) => {
                     width: e.target.getAttribute('data-tooltip-width') || config.width,
                     position: e.target.getAttribute('data-tooltip-position') || config.position
                 }
-                var content = e.target.getAttribute('data-tooltip')
+                let content = e.target.getAttribute('data-tooltip')
                 if (typeof config.customContent === "function")
 									content = config.customContent(e.target, content)
 
